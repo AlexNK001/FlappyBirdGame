@@ -1,0 +1,6 @@
+{
+  "name": "UI",
+  "references": [
+    "Unity.TextMeshPro"
+  ]
+}
