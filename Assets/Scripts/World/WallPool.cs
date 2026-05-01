@@ -30,7 +30,7 @@ public class WallPool : MonoBehaviour
         return _pipesPool.Get();
     }
 
-    public void Relise(Wall pipe)
+    public void Reliase(Wall pipe)
     {
         _pipesPool.Release(pipe);
     }

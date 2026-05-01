@@ -62,7 +62,7 @@ public class WallHandler : MonoBehaviour
     
     private void RemoveWallByIndex(int index)
     {
-        _pool.Relise(_walls[index]);
+        _pool.Reliase(_walls[index]);
         _walls.RemoveAt(index);
     }
 }

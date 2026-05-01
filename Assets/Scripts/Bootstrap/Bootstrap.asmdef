@@ -1,8 +1,10 @@
 {
-    "name": "Gameplay",
+    "name": "Bootstrap",
     "rootNamespace": "",
     "references": [
-        "GUID:acfffc34d7e39a749b7aaf6d4e14d319"
+        "Core",
+        "View",
+        "Gameplay"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

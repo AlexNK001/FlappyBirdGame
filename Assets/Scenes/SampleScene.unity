@@ -169,7 +169,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &26859212
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1227,6 +1227,8 @@ GameObject:
   - component: {fileID: 1953529349}
   - component: {fileID: 1953529352}
   - component: {fileID: 1953529351}
+  - component: {fileID: 1953529353}
+  - component: {fileID: 1953529354}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1246,11 +1248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bf9bc151a54e943947a2dca7ecdd4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bird: {fileID: 26859213}
-  _menu: {fileID: 385917228}
+  _gameView: {fileID: 1953529353}
+  _input: {fileID: 1953529354}
   _wallHandler: {fileID: 1953529352}
-  wallPool: {fileID: 1953529351}
-  _scoreText: {fileID: 2015144418}
 --- !u!4 &1953529350
 Transform:
   m_ObjectHideFlags: 0
@@ -1295,6 +1295,35 @@ MonoBehaviour:
   _pool: {fileID: 1953529351}
   _spawnPosition: {fileID: 370868879}
   _despawnXValue: -10
+--- !u!114 &1953529353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953529348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7399f54152f34cc5ac7ef6e1960f2d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _birdView: {fileID: 26859213}
+  _menu: {fileID: 385917228}
+  _scoreDisplay: {fileID: 2015144420}
+--- !u!114 &1953529354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953529348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b2de70413546838dc704ec64084404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jump: 32
+  _pause: 27
 --- !u!1 &2015144416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1335,7 @@ GameObject:
   - component: {fileID: 2015144417}
   - component: {fileID: 2015144419}
   - component: {fileID: 2015144418}
+  - component: {fileID: 2015144420}
   m_Layer: 5
   m_Name: Score (TMP)
   m_TagString: Untagged
@@ -1429,6 +1459,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015144416}
   m_CullTransparentMesh: 1
+--- !u!114 &2015144420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015144416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0cf36c0e7b1e34d899623aef74c03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 2015144418}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

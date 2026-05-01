@@ -1,21 +1,21 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using TMPro;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _highScoreText;
 
-    public event Action OnClickStart;
+    public event UnityAction OnClickStart;
 
-    private void Start()
+    public void Initialization()
     {
         _startButton.onClick.AddListener(OnButtonClick);
     }
 
-    private void OnDestroy()
+    public void Destroy()
     {
         _startButton.onClick.RemoveListener(OnButtonClick);
     }
@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour
         OnClickStart?.Invoke();
     }
 
-    public void SetHighScore(int highScore)
+    public void ChangeHighScore(int highScore)
     {
         _highScoreText.text = highScore.ToString();
     }
