@@ -5,11 +5,11 @@ public class WallPool : MonoBehaviour
 {
     [SerializeField] private Wall _prefab;
     
-    private ObjectPool<Wall> _pipesPool;
+    private ObjectPool<Wall> _wallPool;
     
-    private void Start()
+    private void Awake()
     {
-        _pipesPool = new
+        _wallPool = new
             (
                 Create,
                 (pair) => pair.gameObject.SetActive(true), 
@@ -27,11 +27,11 @@ public class WallPool : MonoBehaviour
 
     public Wall Get()
     {
-        return _pipesPool.Get();
+        return _wallPool.Get();
     }
 
-    public void Reliase(Wall pipe)
+    public void Reliase(Wall wall)
     {
-        _pipesPool.Release(pipe);
+        _wallPool.Release(wall);
     }
 }

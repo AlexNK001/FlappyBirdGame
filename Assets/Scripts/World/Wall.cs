@@ -2,20 +2,22 @@
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] private Collider2D _upperCollider;
-    [SerializeField] private Collider2D _lowerCollider;
-    [SerializeField] private Collider2D _scoringArea;
+    private const float Widht = 1f;
+    
+    [SerializeField] private BoxCollider2D _upperCollider;
+    [SerializeField] private BoxCollider2D _lowerCollider;
+    [SerializeField] private BoxCollider2D _scoringArea;
 
-    public void SetColliderSize(int upperSize, int scoringSize, int lowerSize)
+    public void SetColliderHeight(int upperHeight, int scoringHeight, int lowerHeight)
     {
-        _upperCollider.transform.localPosition = new Vector2(0f, upperSize * 0.5f);
-        _upperCollider.transform.localScale = new Vector2(1f, upperSize);
+        _upperCollider.transform.localPosition = new Vector2(0f, upperHeight * 0.5f);
+        _upperCollider.transform.localScale = new Vector2(Widht, upperHeight);
 
-        _scoringArea.transform.localPosition = new Vector2(0f, upperSize + scoringSize * 0.5f);
-        _scoringArea.transform.localScale = new Vector2(1f, scoringSize);
+        _scoringArea.transform.localPosition = new Vector2(0f, upperHeight + scoringHeight * 0.5f);
+        _scoringArea.transform.localScale = new Vector2(Widht, scoringHeight);
 
-        _lowerCollider.transform.localPosition = new Vector2(0f, upperSize + scoringSize + lowerSize * 0.5f);
-        _lowerCollider.transform.localScale = new Vector2(1f, lowerSize);
+        _lowerCollider.transform.localPosition = new Vector2(0f, upperHeight + scoringHeight + lowerHeight * 0.5f);
+        _lowerCollider.transform.localScale = new Vector2(Widht, lowerHeight);
     }
 }
 

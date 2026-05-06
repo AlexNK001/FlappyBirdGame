@@ -2,7 +2,8 @@
     "name": "Gameplay",
     "rootNamespace": "",
     "references": [
-        "GUID:acfffc34d7e39a749b7aaf6d4e14d319"
+        "GUID:acfffc34d7e39a749b7aaf6d4e14d319",
+        "GUID:2624b5298770a85408e037cbed9276de"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

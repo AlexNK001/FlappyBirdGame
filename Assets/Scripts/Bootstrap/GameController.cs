@@ -7,24 +7,27 @@ public class GameController : MonoBehaviour
     [SerializeField] private WallHandler _wallHandler;
 
     private GameState _gameModel;
+    private HighScoreStorage _highScoreStorage;
 
     private void Awake()
     {
-        Data data = new Data();
-        int highScore = data.Load();
+        _highScoreStorage = new HighScoreStorage();
+        int highScore = _highScoreStorage.Load();
+
         _gameModel = new GameState(highScore);
         _gameModel.ScoreChanged += _gameView.SetScore;
         _gameModel.HighScoreChanged += _gameView.SetHighScore;
-        _gameModel.Pause();
 
-        _gameView.Initialization(_gameModel.HighScore);
-        _gameView.ClickedStartButton += HandlePause;
+        _gameView.Subscribe();
+        _gameView.ClickedStartButton += OnRestartGame;
         _gameView.Triggered += _gameModel.AddScore;
         _gameView.Died += OnHandleDied;
-        _gameView.Pause();
+        _gameView.SetHighScore(_gameModel.HighScore);
 
-        _input.Jumped += Jump;
-        _input.Paused += HandlePause;
+        _input.Jumped += OnJump;
+        _input.Paused += OnTogglePause;
+
+        Pause();
     }
 
     private void OnDestroy()
@@ -32,44 +35,56 @@ public class GameController : MonoBehaviour
         _gameModel.ScoreChanged -= _gameView.SetScore;
         _gameModel.HighScoreChanged -= _gameView.SetHighScore;
 
-        _gameView.ClickedStartButton -= HandlePause;
+        _gameView.ClickedStartButton -= OnRestartGame;
         _gameView.Triggered -= _gameModel.AddScore;
         _gameView.Died -= OnHandleDied;
-        _gameView.Destroy();
+        _gameView.Unsubscribe();
 
-        _input.Jumped -= Jump;
-        _input.Paused -= HandlePause;
+        _input.Jumped -= OnJump;
+        _input.Paused -= OnTogglePause;
     }
 
-    private void HandlePause()
+    private void OnRestartGame()
     {
         if (_gameModel.IsAlive == false)
-        {
             Restart();
-        }
-        
-        if (_gameModel.IsPlaying)
-        {
-            _gameModel.Pause();
-            _gameView.Pause();
-        }
-        else
-        {
-            _gameModel.Resume();
-            _gameView.Resume();
-        }
+
+        Resume();
     }
 
-    private void Jump()
+    private void OnTogglePause()
     {
         if (_gameModel.IsAlive)
         {
+            if (_gameModel.IsPlaying)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
+        }
+    }
+
+    private void Pause()
+    {
+        _gameModel.Pause();
+        _gameView.Pause();
+        Time.timeScale = 0f;
+    }
+
+    private void Resume()
+    {
+        _gameModel.Resume();
+        _gameView.Resume();
+        Time.timeScale = 1;
+    }
+
+    private void OnJump()
+    {
+        if (_gameModel.IsPlaying)
             _gameView.Jump();
-        }
-        else
-        {
-            Restart();
-        }
     }
 
     private void Restart()
@@ -82,6 +97,13 @@ public class GameController : MonoBehaviour
     private void OnHandleDied()
     {
         _gameModel.Die();
-        _gameModel.Pause();
+        Pause();
+
+        int highScore = _highScoreStorage.Load();
+
+        if (highScore > _gameModel.HighScore)
+        {
+            _highScoreStorage.Save(highScore);
+        }
     }
 }

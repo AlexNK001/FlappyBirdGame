@@ -8,24 +8,24 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _highScoreText;
 
-    public event UnityAction OnClickStart;
+    public event UnityAction StartButtonClicked;
 
-    public void Initialization()
+    public void Subscribe()
     {
         _startButton.onClick.AddListener(OnButtonClick);
     }
 
-    public void Destroy()
+    public void Unsubscribe()
     {
         _startButton.onClick.RemoveListener(OnButtonClick);
     }
 
     private void OnButtonClick()
     {
-        OnClickStart?.Invoke();
+        StartButtonClicked?.Invoke();
     }
 
-    public void ChangeHighScore(int highScore)
+    public void SetHighScore(int highScore)
     {
         _highScoreText.text = highScore.ToString();
     }

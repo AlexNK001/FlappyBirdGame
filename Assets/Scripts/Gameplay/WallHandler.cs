@@ -7,15 +7,15 @@ public class WallHandler : MonoBehaviour
     [SerializeField] private WallPool _pool;
     [SerializeField] private Transform _spawnPosition;
     [SerializeField] private float _despawnXValue;
+    [SerializeField] private WallSpawnConfig _config;
 
     private WallRandomizer _wallRandomizer;
-    private List<Wall> _walls;
+    private List<Wall> _walls = new();
     private float _spawnDistance;
 
-    private void Start()
+    private void Awake()
     {
-        _wallRandomizer = new WallRandomizer();
-        _walls = new List<Wall>();
+        _wallRandomizer = new(_config);
     }
 
     private void Update()
@@ -30,7 +30,7 @@ public class WallHandler : MonoBehaviour
         Vector2 moveDirection = _speed * Time.deltaTime * Vector2.left;
         _spawnDistance -= Mathf.Abs(moveDirection.x);
 
-        for (int i = 0; i < _walls.Count; i++)
+        for (int i = _walls.Count - 1; i >= 0; i--)
         {
             _walls[i].transform.Translate(moveDirection, Space.Self);
 
@@ -50,16 +50,16 @@ public class WallHandler : MonoBehaviour
 
         _spawnDistance = _wallRandomizer.GetRandomDistance();
     }
-    
+
     private Wall AddWallToSpawnPosition()
     {
         Wall wall = _pool.Get();
         wall.transform.position = _spawnPosition.position;
         _walls.Add(wall);
-       
+
         return wall;
     }
-    
+
     private void RemoveWallByIndex(int index)
     {
         _pool.Reliase(_walls[index]);

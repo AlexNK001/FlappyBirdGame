@@ -11,51 +11,44 @@ public class GameView : MonoBehaviour
     public event UnityAction Died;
     public event UnityAction ClickedStartButton;
 
-    public void Initialization(int highScore)
+    public void Subscribe()
     {
-        SetHighScore(highScore);
-        _birdView.Initialization();
-        _menu.Initialization();
+        _menu.Subscribe();
         _birdView.Triggered += OnHandleTriggered;
         _birdView.Died += OnHandleDied;
-        _menu.OnClickStart += OnHandleClick;
+        _menu.StartButtonClicked += OnHandleClick;
     }
 
-    public void Destroy()
+    public void Unsubscribe()
     {
         _birdView.Triggered -= OnHandleTriggered;
         _birdView.Died -= OnHandleDied;
-        _menu.OnClickStart -= OnHandleClick;
-        _menu.Destroy();
+        _menu.StartButtonClicked -= OnHandleClick;
+        _menu.Unsubscribe();
     }
 
     private void OnHandleTriggered()
     {
-        Triggered.Invoke();
+        Triggered?.Invoke();
     }
 
     private void OnHandleDied()
     {
-        Died.Invoke();
-        Pause();
+        Died?.Invoke();
     }
 
     private void OnHandleClick()
     {
-        ClickedStartButton.Invoke();
-        Restart();
-        Resume();
+        ClickedStartButton?.Invoke();
     }
 
     public void Pause()
     {
-        Time.timeScale = 0f;
         _menu.Show();
     }
 
     public void Resume()
     {
-        Time.timeScale = 1;
         _menu.Hide();
     }
 
@@ -71,7 +64,7 @@ public class GameView : MonoBehaviour
 
     public void SetHighScore(int highScore)
     {
-        _menu.ChangeHighScore(highScore);
+        _menu.SetHighScore(highScore);
     }
 
     public void Restart()
