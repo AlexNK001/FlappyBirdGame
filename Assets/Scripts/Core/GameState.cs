@@ -2,14 +2,14 @@
 
 public class GameState
 {
-    private int _score;
+   private int _score;
 
     public event Action<int> ScoreChanged;
     public event Action<int> HighScoreChanged;
 
-    public GameState(int highScore)
+    public GameState(HighScoreStorage storage)
     {
-        HighScore = highScore;
+        HighScore = storage.Load();
         IsAlive = true;
     }
 

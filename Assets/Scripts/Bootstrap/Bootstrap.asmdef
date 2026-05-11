@@ -4,7 +4,8 @@
     "references": [
         "Core",
         "View",
-        "Gameplay"
+        "Gameplay",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
