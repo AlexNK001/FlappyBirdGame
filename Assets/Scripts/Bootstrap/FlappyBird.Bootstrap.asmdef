@@ -1,0 +1,20 @@
+{
+    "name": "FlappyBird.Bootstrap",
+    "rootNamespace": "",
+    "references": [
+        "FlappyBird.Core",
+        "Zenject",
+        "FlappyBird.Gameplay",
+        "FlappyBird.View",
+        "FlappyBird.World"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
