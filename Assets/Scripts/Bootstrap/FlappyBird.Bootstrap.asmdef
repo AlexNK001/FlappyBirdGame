@@ -5,8 +5,7 @@
         "FlappyBird.Core",
         "Zenject",
         "FlappyBird.Gameplay",
-        "FlappyBird.View",
-        "FlappyBird.World"
+        "FlappyBird.View"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
