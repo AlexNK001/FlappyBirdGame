@@ -38,6 +38,8 @@ public class BirdMovement : MonoBehaviour
     private void OnRestart()
     {
         _rigidbody.velocity = Vector2.zero;
+        _rigidbody.angularVelocity = 0f;
+        transform.rotation = Quaternion.identity;
         transform.position = _startPosition;
     }
 }
