@@ -1,22 +1,22 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System;
+using UnityEngine;
 
-public class UserInput : MonoBehaviour
+public class UserInput : MonoBehaviour, IUserInput
 {
-    [SerializeField] private KeyCode _jump = KeyCode.Space;
-    [SerializeField] private KeyCode _pause = KeyCode.Escape;
+    [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
+    [SerializeField] private KeyCode _pauseKey = KeyCode.Escape;
 
-    public event UnityAction Jumped;
-    public event UnityAction Paused;
+    public event Action Jumped;
+    public event Action Paused;
 
     private void Update()
     {
-        if (Input.GetKeyDown(_jump))
+        if (Input.GetKeyDown(_jumpKey))
         {
             Jumped?.Invoke();
         }
 
-        if (Input.GetKeyDown(_pause))
+        if (Input.GetKeyDown(_pauseKey))
         {
             Paused?.Invoke();
         }
